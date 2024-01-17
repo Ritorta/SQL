@@ -1,0 +1,89 @@
+-- Вы работаете с PostgreSQL.
+Создайте таблицу (сущность) с мобильными телефонами mobile_phones. При создании необходимо использовать DDL-команды.
+Перечень полей (атрибутов):
+id – числовой тип, автоинкремент, первичный ключ;
+product_name – строковый тип, обязательный к заполнению;
+manufacturer – строковый тип, обязательный к заполнению;
+product_count – числовой тип, беззнаковый;
+price – числовой тип, беззнаковый.
+Используя CRUD-операцию INSERT, наполните сущность mobile_phones данными:
+product_name 	manufacturer 	product_count 	price
+iPhone X 	Apple 	156 	76000
+iPhone 8 	Apple 	180 	51000
+Galaxy S9 	Samsung 	21 	56000
+Galaxy S8 	Samsung 	124 	41000
+P20 Pro 	Huawei 	341 	36000
+
+Важно: Чтобы проверка прошла успешно, перед нажатием кнопки Проверить студент должен написать запрос и нажать кнопку Выполнить.
+
+# Решение:
+
+# Код SQL
+
+CREATE DATABASE Task1;
+
+USE Task1;
+
+CREATE TABLE mobile_phones
+(
+id INT AUTO_INCREMENT PRIMARY KEY,
+product_name VARCHAR(24) NOT NULL,
+manufacturer VARCHAR(24) NOT NULL,
+product_count  INT UNSIGNED,
+price  INT UNSIGNED
+);
+
+INSERT INTO mobile_phones (product_name, manufacturer, product_count, price)
+VALUES
+("iPhone X", "Apple", 156, 76000),
+("iPhone 8", "Apple", 180, 51000),
+("Galaxy S9", "Samsung", 21, 56000),
+("Galaxy S8", "Samsung", 124, 41000),
+("P20 Pro", "Huawei", 341, 36000);
+
+
+SELECT * FROM mobile_phones;
+
+# Код PostgreSQL
+
+CREATE TABLE Task1.mobile_phones 
+(
+id SERIAL PRIMARY KEY,
+product_name VARCHAR(255) NOT NULL,
+manufacturer VARCHAR(255) NOT NULL,
+product_count INTEGER,
+price INTEGER
+);
+
+INSERT INTO Task1.mobile_phones (product_name, manufacturer, product_count, price)
+VALUES
+('iPhone 12', 'Apple', 10, 999),
+('Galaxy S21', 'Samsung', 15, 899),
+('Pixel 5', 'Google', 8, 699),
+('OnePlus 9', 'OnePlus', 12, 799),
+('Mi 11', 'Xiaomi', 20, 699);
+
+SELECT * FROM Task1.mobile_phones;
+
+# Решение БОТ PostgreSQL
+
+-- удаляем таблицу с мобильными телефонами `mobile_phones`, если она существует
+DROP TABLE IF EXISTS {schema_name}.mobile_phones;
+-- создаём таблицу с мобильными телефонами (mobile_phones)
+CREATE TABLE {schema_name}.mobile_phones (
+    id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    manufacturer VARCHAR(100) NOT NULL,
+    product_count INT,
+    price BIGINT
+);
+
+-- наполнение данными
+INSERT INTO {schema_name}.mobile_phones (product_name, manufacturer, product_count, price)
+VALUES
+    ('iPhone X', 'Apple', 3, 76000),  
+    ('iPhone 8', 'Apple', 2, 51000),  
+    ('Galaxy S9', 'Samsung', 2, 56000),  
+    ('Galaxy S8', 'Samsung', 1, 41000),
+    ('P20 Pro', 'Huawei', 5, 36000);
+
