@@ -1,0 +1,26 @@
+     
+
+Максимальная заработная плата
+-- Вы работаете с MySQL
+Имеется таблица (сущность) с персоналом staff.
+У сущности имеются следующие поля(атрибуты):
+id – идентификатор;
+firstname – имя;
+lastname - фамилия
+post - должность,
+seniority – стаж;
+salary – заработная плата;
+age - возраст.
+
+Необходимо вывести идентификатор, имя, фамилию, заработную плату пяти самых высокооплачиваемых сотрудников из сущности staff.
+
+SELECT `id`, `firstname`, `lastname`, `salary`
+FROM staff
+ORDER BY salary DESC LIMIT 5;
+
+Бот код:
+
+SELECT `id`, `firstname`, `lastname`, `salary` 
+FROM staff 
+ORDER BY salary DESC
+LIMIT 5;
