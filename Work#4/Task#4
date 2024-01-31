@@ -31,3 +31,20 @@ email - адрес электронной почты.
 Найдите количество друзей у каждого пользователя. Выведите для каждого пользователя идентификатор пользователя, фамилию, имя и количество друзей. Сортировка выводимых записей в порядке возрастания идентификатора пользователя.
 
 
+SELECT u.id, u.firstname, u.lastname, COUNT(fr.status) AS friends_count
+FROM users u
+LEFT JOIN friend_requests fr ON (fr.initiator_user_id = u.id OR fr.target_user_id = u.id) AND fr.status = 'approved'
+GROUP BY u.id, u.lastname, u.firstname
+ORDER BY u.id ASC;
+
+Решение бот:
+
+SELECT 
+u.id, 
+u.firstname, 
+u.lastname, 
+COUNT(fr.status) AS cnt 
+FROM users u
+LEFT JOIN friend_requests fr ON (u.id = fr.initiator_user_id or u.id = fr.target_user_id) AND fr.status = 'approved'
+GROUP BY u.id
+ORDER BY u.id;

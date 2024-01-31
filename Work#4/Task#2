@@ -38,3 +38,30 @@ media_id - медиа, который лайкнули.
 Найдите количество лайков, которые поставили пользователи женского пола и мужского пола.
 Выведите название пола (преобразовав значение атрибута f в женский, а значение ‘m` - мужской) и количество, поставленных лайков, применив к количеству лайков сортировку по убыванию.
 
+SELECT
+CASE 
+WHEN p.gender = 'f' THEN 'женский' 
+ELSE 'мужской' 
+END AS пол,
+COUNT(likes.id) AS количество_лайков
+FROM
+profiles p
+JOIN users u ON u.id = p.user_id
+JOIN likes ON likes.user_id = u.id
+GROUP BY p.gender
+ORDER BY количество_лайков DESC;
+
+
+
+Бот решение:
+
+SELECT 
+CASE p.gender
+WHEN 'f' THEN 'женский'
+WHEN 'm' THEN 'мужской'
+END AS gender, 
+COUNT(*) AS cnt
+FROM likes l 
+JOIN profiles p on l.user_id = p.user_id
+GROUP BY p.gender 
+ORDER BY cnt DESC;
