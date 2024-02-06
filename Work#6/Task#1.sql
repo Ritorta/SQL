@@ -189,7 +189,7 @@ DETERMINISTIC
 	  DECLARE hours_value INT;
 	  DECLARE minutes_value INT;
 	  -- параметр "DIV" тоже деление но работает более коректно нежели просто символ "/" в данном случае
-    
+
 	  -- считаем дни
 	  IF seconds >= 86400 THEN
 		SET days_value = seconds DIV 86400;
@@ -217,4 +217,14 @@ DELIMITER ;
 
 SELECT W6T1(123456) AS 'Day and Time';
 
+-----------
+Вариант №4 - Готовая формула с гугла
+-----------
 
+DROP DATABASE IF EXISTS work_6;
+CREATE DATABASE IF NOT EXISTS work_6;
+USE work_6;
+
+SELECT
+  DATE_FORMAT(date('1970-12-31 23:59:59')
+   + interval 123456 second,'%j days %Hh:%im:%ss') as result;
