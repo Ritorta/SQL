@@ -81,10 +81,10 @@ CREATE PROCEDURE W6T1(seconds INT)
 	BEGIN
 		DECLARE dd INT;
 		DECLARE hh, mm, ss INT;
-			SET dd = cast(floor(seconds/60/60/24) AS CHAR(3));
-			SET hh = cast(floor(mod(seconds/60/60/24,1)*24) AS CHAR(2));
-			SET mm = cast(floor(mod(mod(seconds/60/60/24,1)*24,1)*60) AS CHAR(2));
-			SET ss = cast(round(mod(mod(mod(seconds/60/60/24,1)*24,1)*60,1)*60) AS CHAR(2));
+			SET dd = CAST(FLOOR(seconds/60/60/24) AS CHAR(3));
+			SET hh = CAST(FLOOR(mod(seconds/60/60/24,1)*24) AS CHAR(2));
+			SET mm = CAST(FLOOR(mod(mod(seconds/60/60/24,1)*24,1)*60) AS CHAR(2));
+			SET ss = CAST(ROUND(mod(mod(mod(seconds/60/60/24,1)*24,1)*60,1)*60) AS CHAR(2));
 			SET @result = CONCAT(dd,' day ', hh,' hors ', mm,' min ', ss, ' sec');
 	END //
 
@@ -112,10 +112,10 @@ DETERMINISTIC
 		DECLARE dd INT;
 		DECLARE hh, mm, ss INT;
 		DECLARE result VARCHAR(30);
-			SET dd = cast(floor(seconds/60/60/24) AS CHAR(3));
-			SET hh = cast(floor(mod(seconds/60/60/24,1)*24) AS CHAR(2));
-			SET mm = cast(floor(mod(mod(seconds/60/60/24,1)*24,1)*60) AS CHAR(2));
-			SET ss = cast(round(mod(mod(mod(seconds/60/60/24,1)*24,1)*60,1)*60) AS CHAR(2));
+			SET dd = CAST(FLOOR(seconds/60/60/24) AS CHAR(3));
+			SET hh = CAST(FLOOR(mod(seconds/60/60/24,1)*24) AS CHAR(2));
+			SET mm = CAST(FLOOR(mod(mod(seconds/60/60/24,1)*24,1)*60) AS CHAR(2));
+			SET ss = CAST(ROUND(mod(mod(mod(seconds/60/60/24,1)*24,1)*60,1)*60) AS CHAR(2));
 			SET result = CONCAT(dd,' day ', hh,' hors ', mm,' min ', ss, ' sec');
 		RETURN result;
 	END //
@@ -226,5 +226,5 @@ CREATE DATABASE IF NOT EXISTS work_6;
 USE work_6;
 
 SELECT
-  DATE_FORMAT(date('1970-12-31 23:59:59')
-   + interval 123456 second,'%j days %Hh:%im:%ss') as result;
+  DATE_FORMAT(DATE('1970-12-31 23:59:59')
+   + interval 123456 SECOND,'%j days %Hh:%im:%ss') AS result;
